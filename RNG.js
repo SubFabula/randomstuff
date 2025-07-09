@@ -1,4 +1,8 @@
 const RNGBtn = document.getElementById("RNG-Button");
+const RNGBarWorking = document.getElementById("RNG-Waiting");
+const RNGLevelDiv = document.getElementById("div2");
+const RNGLevelMtr = document.getElementById("RNG-LevelMtr");
+const RNGLevelCnt = document.getElementById("RNG-LevelCnt");
 
 let r = 0, g = 0, b = 0;
 let RNGBtnColor = `rgb(${r}, ${g}, ${b})`;
@@ -23,7 +27,7 @@ async function RNGBtnTextCycle() {
     await sleep(500); // 0.5 seconds
   }
 
-  RNGBtn.value = "Bana tıklayın!";
+  RNGBtn.value = "Zar Atın!";
 }
 
 async function RNGBtnColorRnd() {
@@ -41,17 +45,63 @@ async function RNGBtnColorRnd() {
     await sleep((i + x) * 1); // 0.001+ seconds 
   }
     
-  console.log(`Color: ${RNGBtnColor}`);  
+  console.log(`Color: ${RNGBtnColor}`);
+  
+  RNGBarWorking.style.display = "none";
+}
+
+function RNGBarWorkingShow() {
+  RNGBarWorking.style.display = "inline";
+}
+
+function RNGCalculate() {
+  let RNGLevelRslt = 0;
+  let rBig = false;
+  let gBig = false;
+  let bBig = false;
+  
+  if (r > g && r > b) {
+    rBig = true;
+  } else if (g > r && g > b) {
+    gBig = true;
+  } else if (b > r && b > g) {
+    bBig = true;
+  }
+  
+  if (rBig === true) {
+    RNGLevelRslt = r;
+    console.log(`rBig is ${rBig}`);
+    RNGLevelCnt.innerText = `Kırmızı: ${r}`
+  } else if (gBig === true) {
+    RNGLevelRslt = g;
+    console.log(`gBig is ${gBig}`)
+    RNGLevelCnt.innerText = `Yeşil: ${g}`
+  } else if (bBig === true) {
+    RNGLevelRslt = b;
+    console.log(`bBig is ${bBig}`)
+    RNGLevelCnt.innerText = `Mavi: ${b}`
+  }
+  
+  RNGLevelDiv.style.display = "block";
+  
+  console.log(`RNGLevelMtr: ${RNGLevelRslt}`)
+  
+  RNGLevelMtr.value = RNGLevelRslt;
 }
 
 async function RNGGo() {
   RNGBtn.disabled = true;
-
+  
   await Promise.all([
     RNGBtnColorRnd(),
-    RNGBtnTextCycle()
+    RNGBtnTextCycle(),
+    RNGBarWorkingShow()
   ]);
 
+  await Promise.all([
+    RNGCalculate()
+  ]);
+  
   setTimeout(() => {
     RNGBtn.disabled = false;
   }, 1000); // 1 second

@@ -1,4 +1,12 @@
+#div1 {
+  margin-bottom: 10px;
+  display: block;
+}
+
 #RNG-Button {
+  width: 100px;
+  will-change: auto;
+  text-align: left;
   -webkit-transition: 0.4s ease-in-out;
      -moz-transition: 0.4s ease-in-out;
        -o-transition: 0.4s ease-in-out;
@@ -6,3 +14,18 @@
           transition: 0.4s ease-in-out;
 }
 
+#RNG-Waiting {
+   display: none;
+}
+
+#div2 {
+  display: none;
+}
+
+#RNG-LevelLbl {
+  
+}
+
+#RNG-LevelMtr {
+  width: 100px
+}

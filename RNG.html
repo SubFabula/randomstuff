@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="RNG" content="What's better than a RNG Roblox game? A RNG Web Application.">
     <title>RNG - Random Number Generator</title>
     <!-- Import Styles -->
@@ -16,6 +17,14 @@
     
     <h1>RNG - Random Number Generator</h1>
     
-    <input id="RNG-Button" type="button" value="Bana tıkla!"l>
+    <div id="div1">
+      <input id="RNG-Button" type="button" value="Zar Atın!">
+      <progress id="RNG-Waiting"></progress>
+    </div>
+    <div id="div2">
+      <label id="RNG-LevelLbl" for="RNG-LevelMtr">Senin skorun:</label>
+      <meter id="RNG-LevelMtr" value="0" min="10" max="255"></meter>
+      <p id="RNG-LevelCnt"></p>
+    </div>
   </body>
 </html>
