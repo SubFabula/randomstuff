@@ -1,12 +1,16 @@
+document.addEventListener("DOMContentLoaded", () => {
+  // Your code goes here
+});
+
 const RNGBtn = document.getElementById("RNG-Button");
 const RNGBarWorking = document.getElementById("RNG-Waiting");
 const RNGLevelDiv = document.getElementById("div2");
 const RNGLevelMtr = document.getElementById("RNG-LevelMtr");
 const RNGLevelCnt = document.getElementById("RNG-LevelCnt");
 
+let RNGisRNGing = false;
 let r = 0, g = 0, b = 0;
 let RNGBtnColor = `rgb(${r}, ${g}, ${b})`;
-let x = 0;
 const maxCycle = 151;
 
 function sleep(ms) {
@@ -31,6 +35,8 @@ async function RNGBtnTextCycle() {
 }
 
 async function RNGBtnColorRnd() {
+  let x = 0;
+  
   for (let i = 0; i < maxCycle; i++) {
     r = getRndInteger(20, 256);
     g = getRndInteger(80, 256);
@@ -90,12 +96,16 @@ function RNGCalculate() {
 }
 
 async function RNGGo() {
+  if (RNGisRNGing) return
+  RNGisRNGing = true;
+  
   RNGBtn.disabled = true;
+  
+  RNGBarWorkingShow()
   
   await Promise.all([
     RNGBtnColorRnd(),
     RNGBtnTextCycle(),
-    RNGBarWorkingShow()
   ]);
 
   await Promise.all([
@@ -104,6 +114,7 @@ async function RNGGo() {
   
   setTimeout(() => {
     RNGBtn.disabled = false;
+    RNGisRNGing = false;
   }, 1000); // 1 second
 }
 
