@@ -11,7 +11,6 @@ const RNGLevelCnt = document.getElementById("RNG-LevelCnt");
 let RNGisRNGing = false;
 let r = 0, g = 0, b = 0;
 let RNGBtnColor = `rgb(${r}, ${g}, ${b})`;
-const maxCycle = 151;
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -21,7 +20,7 @@ function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-async function RNGBtnTextCycle() {
+async function RNGBtnTextCycle(maxCycle) {
   const states = ["Zar Dönüyor.", "Zar Dönüyor..", "Zar Dönüyor..."];
   let i = 0;
 
@@ -34,13 +33,13 @@ async function RNGBtnTextCycle() {
   RNGBtn.value = "Zar Atın!";
 }
 
-async function RNGBtnColorRnd() {
+async function RNGBtnColorRnd(maxCycle) {
   let x = 0;
   
   for (let i = 0; i < maxCycle; i++) {
-    r = getRndInteger(20, 256);
-    g = getRndInteger(80, 256);
-    b = getRndInteger(10, 256);
+    r = getRndInteger(0, 256);
+    g = getRndInteger(0, 256);
+    b = getRndInteger(0, 256);
     
     RNGBtnColor = `rgb(${r}, ${g}, ${b})`;
     RNGBtn.style.backgroundColor = RNGBtnColor;
@@ -101,11 +100,14 @@ async function RNGGo() {
   
   RNGBtn.disabled = true;
   
+  const RNGCycleMnlValue = parseInt(document.getElementById("RNG-CycleManual").value) || 150;
+  const maxCycle = RNGCycleMnlValue + 1; // const maxCycle = 151;
+  
   RNGBarWorkingShow()
   
   await Promise.all([
-    RNGBtnColorRnd(),
-    RNGBtnTextCycle(),
+    RNGBtnColorRnd(maxCycle),
+    RNGBtnTextCycle(maxCycle),
   ]);
 
   await Promise.all([

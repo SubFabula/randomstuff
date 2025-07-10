@@ -3,6 +3,10 @@
   display: block;
 }
 
+#RNG-CycleManual {
+  width: 110px;
+}
+
 #RNG-Button {
   width: 100px;
   will-change: auto;
@@ -15,15 +19,18 @@
 }
 
 #RNG-Waiting {
+  margin: 2.5px 5px;
+  position: absolute;
    display: none;
 }
 
 #div2 {
+  margin-top: 15px;
   display: none;
 }
 
-#RNG-LevelLbl {
-  
+#div2 p {
+  margin-top: 2.5px;
 }
 
 #RNG-LevelMtr {
